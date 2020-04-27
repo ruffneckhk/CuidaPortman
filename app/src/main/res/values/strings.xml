@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Cuida Portman</string>
+    <string name="nombre">Nombre</string>
+    <string name="usuario">Usuario</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="repita_password">Repita Contraseña</string>
+    <string name="telefono">Telefono</string>
+    <string name="registrar_cuenta">Registrar Cuenta</string>
+    <string name="pantalla_de_profile">Pantalla de profile</string>
+    <string name="registrar">Registrar</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
+    <string name="iniciar_sesion">Iniciar Sesion</string>
+    <string name="cuenta_existente">Ya tengo cuenta</string>
+    <string name="reestablecer">Reestablecer Contraseña</string>
+    <string name="olvidada">Olvide mi contraseña</string>
+    <string name="capturar">Capturar</string>
+</resources>

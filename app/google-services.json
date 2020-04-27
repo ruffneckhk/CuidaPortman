@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "567197264863",
+    "firebase_url": "https://cuida-portman-f6d65.firebaseio.com",
+    "project_id": "cuida-portman-f6d65",
+    "storage_bucket": "cuida-portman-f6d65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567197264863:android:4365e2eeb92ed2689e326a",
+        "android_client_info": {
+          "package_name": "com.jorgejag.cuidaportman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567197264863-23kt5le9gubmkimqnbmbv57r58oue1kj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jorgejag.cuidaportman",
+            "certificate_hash": "68b72bd89ee22af54cfde1f186b5f4d7758e8e70"
+          }
+        },
+        {
+          "client_id": "567197264863-tuh09s3t61eqdo80405g658gq11ashnf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jorgejag.cuidaportman",
+            "certificate_hash": "89257906b623e6cba6dbba48a5a62560c098c02c"
+          }
+        },
+        {
+          "client_id": "567197264863-thnne256pvlaff60jgj7cnvmpgmqdema.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQD9ty3qDD3eoUcuNXsTA8YsfoQ_bhWIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567197264863-thnne256pvlaff60jgj7cnvmpgmqdema.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
