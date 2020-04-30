@@ -15,5 +15,10 @@
     <string name="cuenta_existente">Ya tengo cuenta</string>
     <string name="reestablecer">Reestablecer Contraseña</string>
     <string name="olvidada">Olvide mi contraseña</string>
-    <string name="capturar">Capturar</string>
+    <string name="capturar">Nueva Incidencia</string>
+    <string name="tomar_foto">Tomar Foto</string>
+    <string name="escribe_el_comentario">Escribe el comentario</string>
+    <string name="realiza_una_foto">Realiza una foto</string>
+    <string name="enviar_incidencia">Enviar Incidencia</string>
+    <string name="fotocapturada">Foto Capturada</string>
 </resources>
