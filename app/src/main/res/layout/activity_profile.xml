@@ -46,7 +46,6 @@
         android:layout_width="402dp"
         android:layout_height="527dp"
         android:contentDescription="@string/capturar"
-        android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toTopOf="@+id/textViewName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

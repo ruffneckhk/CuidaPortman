@@ -170,14 +170,14 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        if (imageUri != null) {
+        if (imageUri != null && !editTextComent.getText().toString().equals("")) {
             //Damos un nombre unico a cada incidencia subida
             StorageReference fileRerence = storageReference.child("incidencias" + System.currentTimeMillis() + ".jpg");
 
-            uploadTask = fileRerence.putFile(imageUri) .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            uploadTask = fileRerence.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //Retrasa el tiempo para la barra de progreso
+                    //Retraso de tiempo para la barra de progreso
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -193,6 +193,7 @@ public class UploadActivity extends AppCompatActivity {
                     String uploadId = database.push().getKey();
                     database.child(uploadId).setValue(upload);
                 }
+
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
@@ -207,7 +208,7 @@ public class UploadActivity extends AppCompatActivity {
             });
 
         } else {
-            Toast.makeText(this, "No has realizado la foto", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Debes realizar una foto y dejar un comentario", Toast.LENGTH_SHORT).show();
         }
     }
 }
