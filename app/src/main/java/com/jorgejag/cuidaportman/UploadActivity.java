@@ -69,8 +69,8 @@ public class UploadActivity extends AppCompatActivity {
         editTextComent = findViewById(R.id.editTextComent);
         progressBar = findViewById(R.id.progressBar);
 
-        storageReference = FirebaseStorage.getInstance().getReference("incidencias");
-        database = FirebaseDatabase.getInstance().getReference("incidencias");
+        storageReference = FirebaseStorage.getInstance().getReference("Incidencias");
+        database = FirebaseDatabase.getInstance().getReference("Incidencias");
 
         //Accion de cada boton
         imgBtnCapture.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +172,7 @@ public class UploadActivity extends AppCompatActivity {
     private void uploadFile() {
         if (imageUri != null && !editTextComent.getText().toString().equals("")) {
             //Damos un nombre unico a cada incidencia subida
-            StorageReference fileRerence = storageReference.child("incidencias" + System.currentTimeMillis() + ".jpg");
+            StorageReference fileRerence = storageReference.child("Incidencias" + System.currentTimeMillis() + ".jpg");
 
             uploadTask = fileRerence.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
