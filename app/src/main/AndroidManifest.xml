@@ -20,7 +20,7 @@
         <activity android:name=".UploadActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ImagesActivity" />
         <activity
             android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustResize">

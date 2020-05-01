@@ -1,25 +1,15 @@
 package com.jorgejag.cuidaportman;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +20,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ImagesActivity extends AppCompatActivity {
 
     private TextView textViewNombre;
     private TextView textViewCorreo;
@@ -44,28 +32,56 @@ public class ProfileActivity extends AppCompatActivity {
     private Button btnIncidencia;
 
     private FirebaseAuth auth;
-    private DatabaseReference database;
+    private DatabaseReference usersDatabase;
+    private DatabaseReference incidencesDatabase;
+
+    private RecyclerView recyclerView;
+    private ImageAdapter imageAdapter;
+    private List<Upload> uploads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_images);
 
         btnSingOut = findViewById(R.id.btnSingOut);
         btnIncidencia = findViewById(R.id.btnIncidencia);
         textViewNombre = findViewById(R.id.textViewName);
 
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference();
+        usersDatabase = FirebaseDatabase.getInstance().getReference();
+        incidencesDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
-        //textViewCorreo = findViewById(R.id.textViewEmail);
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        uploads = new ArrayList<>();
+
+        incidencesDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Upload upload = postSnapshot.getValue(Upload.class);
+                    uploads.add(upload);
+                }
+
+                imageAdapter = new ImageAdapter(ImagesActivity.this, uploads);
+                recyclerView.setAdapter(imageAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(ImagesActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //Accion de cada boton
         btnIncidencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Envio hacia la activity upload
-                startActivity(new Intent(ProfileActivity.this, UploadActivity.class));
+                startActivity(new Intent(ImagesActivity.this, UploadActivity.class));
                 finish();
             }
         });
@@ -75,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 auth.signOut();
-                startActivity(new Intent(ProfileActivity.this, RegisterActivity.class));
+                startActivity(new Intent(ImagesActivity.this, RegisterActivity.class));
                 finish();
             }
         });
@@ -88,7 +104,7 @@ public class ProfileActivity extends AppCompatActivity {
     //Pedimos a la base de datos los datos del id que ha iniciado sesion
     private void getUserInfo() {
         String id = auth.getCurrentUser().getUid();
-        database.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
+        usersDatabase.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
