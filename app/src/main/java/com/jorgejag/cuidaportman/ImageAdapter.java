@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,16 @@ public class ImageAdapter extends RecyclerView.Adapter <ImageAdapter.ImageViewHo
 
             textViewComentario = itemView.findViewById(R.id.text_view_comentario);
             imageView = itemView.findViewById(R.id.image_view_upload);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Hay que anadir ver la imagen en grande
+                    System.out.println("Imagen pulsada");
+                }
+            });
         }
+
+
     }
 }
