@@ -199,7 +199,7 @@ public class UploadActivity extends AppCompatActivity {
                     while (!urlTask.isSuccessful()) ;
                     Uri downloadUrl = urlTask.getResult();
 
-                    //Log.d(TAG, "onSuccess: firebase download url: " + downloadUrl.toString()); //use if testing...don't need this line.
+                    //Log.d(TAG, "onSuccess: firebase download url: " + downloadUrl.toString());
                     Upload upload = new Upload(editTextComent.getText().toString().trim() + " RESOLUCION PENDIENTE", downloadUrl.toString());
 
                     String uploadId = database.push().getKey();

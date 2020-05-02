@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class ImagesActivity extends AppCompatActivity {
 
     private Button btnSingOut;
     private Button btnIncidencia;
+    private ProgressBar progressCircle;
 
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
@@ -47,6 +49,7 @@ public class ImagesActivity extends AppCompatActivity {
         btnSingOut = findViewById(R.id.btnSingOut);
         btnIncidencia = findViewById(R.id.btnIncidencia);
         textViewNombre = findViewById(R.id.textViewName);
+        progressCircle = findViewById(R.id.progressCircle);
 
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
@@ -68,11 +71,13 @@ public class ImagesActivity extends AppCompatActivity {
 
                 imageAdapter = new ImageAdapter(ImagesActivity.this, uploads);
                 recyclerView.setAdapter(imageAdapter);
+                progressCircle.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(ImagesActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                progressCircle.setVisibility(View.INVISIBLE);
             }
         });
 
