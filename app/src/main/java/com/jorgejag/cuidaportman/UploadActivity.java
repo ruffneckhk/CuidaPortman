@@ -77,7 +77,7 @@ public class UploadActivity extends AppCompatActivity {
         imgBtnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Pedir permisos para usar la camera al usuario
+                //Pedir permisos para usar la camara al usuario
                 askCameraPermissions();
                 //Toast.makeText(ImagesActivity.this, "El boton camara ha sido utilizado", Toast.LENGTH_SHORT).show();
             }
@@ -90,6 +90,15 @@ public class UploadActivity extends AppCompatActivity {
                     Toast.makeText(UploadActivity.this, "Subida en progreso", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(UploadActivity.this, ImagesActivity.class));
+                            finish();
+                        }
+                    }, 3000);
+
                 }
             }
         });
@@ -187,19 +196,11 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }, 500);
                     Toast.makeText(UploadActivity.this, "Subida completada", Toast.LENGTH_SHORT).show();
-                    /*Upload upload = new Upload(editTextComent.getText().toString().trim() + " RESOLUCION PENDIENTE",
-                            taskSnapshot.getStorage().getDownloadUrl().toString());
 
-                    //Crea un id unico
-                    String uploadId = database.push().getKey();
-                    database.child(uploadId).setValue(upload);
-
-                    */
                     Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!urlTask.isSuccessful()) ;
                     Uri downloadUrl = urlTask.getResult();
 
-                    //Log.d(TAG, "onSuccess: firebase download url: " + downloadUrl.toString());
                     Upload upload = new Upload(editTextComent.getText().toString().trim() + " RESOLUCION PENDIENTE", downloadUrl.toString());
 
                     String uploadId = database.push().getKey();

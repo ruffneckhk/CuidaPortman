@@ -1,6 +1,8 @@
 package com.jorgejag.cuidaportman;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +60,7 @@ public class ImageAdapter extends RecyclerView.Adapter <ImageAdapter.ImageViewHo
                 @Override
                 public void onClick(View v) {
                     //Hay que anadir ver la imagen en grande
-                    System.out.println("Imagen pulsada");
+                    Toast.makeText(v.getContext(), "Imagen pulsada", Toast.LENGTH_SHORT).show();
                 }
             });
         }
