@@ -25,15 +25,11 @@ public class Details extends AppCompatActivity {
         imageView = findViewById(R.id.imageViewFull);
         textView = findViewById(R.id.txtCommentFull);
 
-
+        //Intent con la informacion de la incidencia
         Intent intent = getIntent();
         String comment = intent.getStringExtra("comment");
-
         byte[] bytes = getIntent().getByteArrayExtra("image");
-
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
-
 
         textView.setText(comment);
         imageView.setImageBitmap(bitmap);

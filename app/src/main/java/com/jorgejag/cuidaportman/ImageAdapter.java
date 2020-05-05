@@ -46,13 +46,16 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, "Has pulsado en la imagen", Toast.LENGTH_SHORT).show();
+
                 String getComment = uploads.get(position).getComent();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.imageView.getDrawable();
+
                 Bitmap bitmap = bitmapDrawable.getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] bytes = stream.toByteArray();
+
+                //Intent
                 Intent intent = new Intent(context, Details.class);
                 intent.putExtra("comment", getComment);
                 intent.putExtra("image", bytes);
