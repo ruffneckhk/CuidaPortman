@@ -2,22 +2,23 @@ package com.jorgejag.cuidaportman;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-public class ImageAdapter extends RecyclerView.Adapter <ImageAdapter.ImageViewHolder>{
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private Context context;
     private List<Upload> uploads;
 
@@ -34,10 +35,30 @@ public class ImageAdapter extends RecyclerView.Adapter <ImageAdapter.ImageViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        Upload uploadCurrent = uploads.get(position);
+    public void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position) {
+        final Upload uploadCurrent = uploads.get(position);
         holder.textViewComentario.setText(uploadCurrent.getComent());
         Picasso.get().load(uploadCurrent.getImageUrl()).placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(holder.imageView);
+
+
+
+        //Pasamos la incidencia a la activity Details
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, "Has pulsado en la imagen", Toast.LENGTH_SHORT).show();
+                String getComment = uploads.get(position).getComent();
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.imageView.getDrawable();
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] bytes = stream.toByteArray();
+                Intent intent = new Intent(context, Details.class);
+                intent.putExtra("comment", getComment);
+                intent.putExtra("image", bytes);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -55,14 +76,6 @@ public class ImageAdapter extends RecyclerView.Adapter <ImageAdapter.ImageViewHo
 
             textViewComentario = itemView.findViewById(R.id.text_view_comentario);
             imageView = itemView.findViewById(R.id.image_view_upload);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Hay que anadir ver la imagen en grande
-                    Toast.makeText(v.getContext(), "Imagen pulsada", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
 
 

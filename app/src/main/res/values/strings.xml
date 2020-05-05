@@ -22,4 +22,6 @@
     <string name="enviar_incidencia">Enviar Incidencia</string>
     <string name="fotocapturada">Foto Capturada</string>
     <string name="full_image">full Image</string>
+    <string name="textview">TextView</string>
+    <string name="imagefull">imageFull</string>
 </resources>
