@@ -9,6 +9,7 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -44,7 +45,7 @@ import java.util.Date;
 public class UploadActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMIISSION_CODE = 101;
-    public static final int CAMERA_REQUEST_CODE = 102;
+    private static final int CAMERA_REQUEST_CODE = 102;
 
     private Button btnSend;
     private ImageView selectedImage;
@@ -52,6 +53,7 @@ public class UploadActivity extends AppCompatActivity {
     private EditText editTextComent;
     private ProgressBar progressBar;
     private Uri imageUri;
+    private Context context;
 
     private StorageReference storageReference;
     private DatabaseReference database;
@@ -134,6 +136,11 @@ public class UploadActivity extends AppCompatActivity {
                 //selectedImage.setImageURI(Uri.fromFile(f));
                 imageUri = Uri.fromFile(f);
                 Picasso.get().load(imageUri).into(selectedImage);
+/*                //System.out.println("EL URI COMPLETO ES " + imageUri);
+
+                //Envio Uri completo al intent ImageAdapter
+                Intent intent = new Intent(this, ImageAdapter.class);
+                intent.putExtra("imgUri", imageUri);*/
             }
 
         }

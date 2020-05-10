@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +42,8 @@ public class ImagesActivity extends AppCompatActivity {
     private ImageAdapter imageAdapter;
     private List<Upload> uploads;
 
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,8 @@ public class ImagesActivity extends AppCompatActivity {
 
                 imageAdapter = new ImageAdapter(ImagesActivity.this, uploads);
                 recyclerView.setAdapter(imageAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true));
+                recyclerView.smoothScrollToPosition(recyclerView.getBottom());
                 progressCircle.setVisibility(View.INVISIBLE);
             }
 
