@@ -33,6 +33,7 @@ public class ImagesActivity extends AppCompatActivity {
     private Button btnSingOut;
     private Button btnIncidencia;
     private ProgressBar progressCircle;
+    private Button btnProfile;
 
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
@@ -53,6 +54,7 @@ public class ImagesActivity extends AppCompatActivity {
         btnIncidencia = findViewById(R.id.btnIncidencia);
         textViewNombre = findViewById(R.id.textViewName);
         progressCircle = findViewById(R.id.progressCircle);
+        btnProfile = findViewById(R.id.btnProfile);
 
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
@@ -103,6 +105,14 @@ public class ImagesActivity extends AppCompatActivity {
                 auth.signOut();
                 startActivity(new Intent(ImagesActivity.this, RegisterActivity.class));
                 finish();
+            }
+        });
+
+        //Boton profile
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ImagesActivity.this, ProfileActivity.class));
             }
         });
 

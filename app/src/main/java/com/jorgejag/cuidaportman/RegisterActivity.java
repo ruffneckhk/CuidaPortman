@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                     //Comprobacion de que la contrasena tenga mas de 6 caracteres
                     if (password.length() >= 6) {
                         //Llamada al metodo registrarUsuario
-                        registrarUsuario();
+                        registerUser();
                     } else {
                         Toast.makeText(RegisterActivity.this, "El password debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
                     }
@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registrarUsuario() {
+    private void registerUser() {
         //Crea el usuario utilizando email y password ingresados
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

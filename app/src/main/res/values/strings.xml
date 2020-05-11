@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cuida Portman</string>
     <string name="nombre">Nombre</string>
+    <string name="actualizar">Actualizar Datos</string>
     <string name="usuario">Usuario</string>
     <string name="apellidos">Apellidos</string>
     <string name="email">Email</string>
@@ -24,4 +25,5 @@
     <string name="full_image">full Image</string>
     <string name="textview">TextView</string>
     <string name="imagefull">imageFull</string>
+    <string name="perfil">Perfil</string>
 </resources>
