@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,7 +41,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Picasso.get().load(uploadCurrent.getImageUrl()).placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(holder.imageView);
 
 
-        //Pasamos la incidencia a la activity Details
+        //Pasamos la incidencia a la activity DetailsActivity
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,15 +54,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] bytes = stream.toByteArray();
 
-/*                //Recojo intent del uri completo
-                Intent getIntent = new Intent(context, UploadActivity.class);
-                String image_path = getIntent.getStringExtra("imgUri");
-                Toast.makeText(context, image_path, Toast.LENGTH_SHORT).show();
-                Uri fileUri = Uri.parse(image_path);*/
-
-
                 //Intent
-                Intent intent = new Intent(context, Details.class);
+                Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("comment", getComment);
                 intent.putExtra("image", bytes);
                 context.startActivity(intent);

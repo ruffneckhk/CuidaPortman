@@ -8,34 +8,65 @@
     android:padding="20dp"
     tools:context=".ProfileActivity">
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginTop="20dp"
-        android:text="@string/nombre"></TextView>
+        android:layout_marginRight="5dp"
+        android:text="@string/nombre_actual"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/nombre"
+        android:textSize="15sp"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editNombreLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nombre"
+        android:hint="@string/nuevo_nombre"
+        android:textSize="15sp"
         android:importantForAutofill="no"
         android:inputType="text|textPersonName"
         tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/textView3"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/email" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/email_actual"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/textViewEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/email"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editEmailLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
+        android:hint="@string/nuevo_email"
+        android:textSize="15sp"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         tools:ignore="LabelFor" />
@@ -51,7 +82,8 @@
         android:id="@+id/editPasswordLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password"
+        android:hint="@string/nuevo_password"
+        android:textSize="15sp"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         tools:ignore="LabelFor" />
@@ -66,10 +98,10 @@
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:textColor="@color/textColor"
             android:layout_gravity="bottom"
-            android:text="@string/actualizar" />
+            android:background="@color/colorAccent"
+            android:text="@string/actualizar"
+            android:textColor="@color/textColor" />
     </LinearLayout>
 
 </LinearLayout>

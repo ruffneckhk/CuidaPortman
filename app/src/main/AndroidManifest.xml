@@ -17,8 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".Details" />
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".DetailsActivity" />
         <activity android:name=".UploadActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".LoginActivity" />

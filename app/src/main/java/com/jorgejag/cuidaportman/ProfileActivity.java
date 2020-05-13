@@ -30,8 +30,8 @@ import java.util.Map;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "LOG";
-    private TextView textViewNombre;
-    private TextView textViewCorreo;
+    private TextView textViewName;
+    private TextView textViewEmail;
     private EditText editTextName;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -50,6 +50,9 @@ public class ProfileActivity extends AppCompatActivity {
         usersDatabase = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
+        textViewName = findViewById(R.id.textViewName);
+        textViewEmail = findViewById(R.id.textViewEmail);
+
         editTextName = findViewById(R.id.editNombreLogin);
         editTextEmail = findViewById(R.id.editEmailLogin);
         editTextPassword = findViewById(R.id.editPasswordLogin);
@@ -59,28 +62,34 @@ public class ProfileActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String name = editTextName.getText().toString();
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
 
-                Map<String, Object> userMap = new HashMap<>();
-                userMap.put("user", name);
-                userMap.put("email", email);
-                userMap.put("password", password);
+                if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(ProfileActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show();
+                } else {
 
-                //Obtenemos el id del usuario
-                String id = auth.getCurrentUser().getUid();
+                    Map<String, Object> userMap = new HashMap<>();
+                    userMap.put("user", name);
+                    userMap.put("email", email);
+                    userMap.put("password", password);
 
-                //Agregamos los datos del hashmap al usuario con el id anteriormente obtenido
-                usersDatabase.child("Usuarios").child(id).setValue(userMap);
+                    //Obtenemos el id del usuario logeado
+                    String id = auth.getCurrentUser().getUid();
 
-
+                    //Agregamos los datos del hashmap al usuario con el id anteriormente obtenido
+                    usersDatabase.child("Usuarios").child(id).setValue(userMap);
+                }
             }
         });
+
+        getUserInfo();
     }
 
 
-    //Trabaja con el usuario que ha iniciado sesion
+    //Trabajamos con el usuario que ha iniciado sesion
     //Pedimos a la base de datos los datos del id que ha iniciado sesion
     private void getUserInfo() {
         String id = auth.getCurrentUser().getUid();
@@ -92,8 +101,8 @@ public class ProfileActivity extends AppCompatActivity {
                     String name = dataSnapshot.child("user").getValue().toString();
                     String email = dataSnapshot.child("email").getValue().toString();
 
-                    textViewNombre.setText("Bienvenido " + name);
-                    textViewCorreo.setText("Este es tu email: " + email);
+                    textViewName.setText(name);
+                    textViewEmail.setText(email);
                 }
             }
 

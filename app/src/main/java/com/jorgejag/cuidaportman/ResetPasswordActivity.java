@@ -54,7 +54,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     private void resetPassword() {
-        //Estable el idioma del correo de recuperacion
+        //Establece el idioma del correo de recuperacion
         auth.setLanguageCode("es");
         //Enviamos el mensaje al email introducido
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {

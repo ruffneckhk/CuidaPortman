@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Details extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView textView;
@@ -31,11 +31,5 @@ public class Details extends AppCompatActivity {
 
         textView.setText(comment);
         imageView.setImageBitmap(bitmap);
-
-
-
-
-
-
     }
 }
