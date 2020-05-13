@@ -1,2 +1,2 @@
 # CuidaPortman
-Proyecto final del ciclo formatido de Desarrollo de Aplicaciones Multiplataforma
+Proyecto final del ciclo formativo de Desarrollo de Aplicaciones Multiplataforma
