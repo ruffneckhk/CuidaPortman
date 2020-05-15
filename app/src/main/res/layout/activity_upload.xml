@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:hint="@string/escribe_el_comentario"
-            android:inputType="text"
+            android:inputType="textCapSentences|textAutoCorrect"
             android:importantForAutofill="no" />
 
         <ImageButton

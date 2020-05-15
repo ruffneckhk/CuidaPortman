@@ -25,10 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImagesActivity extends AppCompatActivity {
+public class ReportActivity extends AppCompatActivity {
 
     private TextView textViewNombre;
-    private TextView textViewCorreo;
 
     private Button btnSingOut;
     private Button btnIncidencia;
@@ -37,18 +36,17 @@ public class ImagesActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
-    private DatabaseReference incidencesDatabase;
+    private DatabaseReference reportsDatabase;
 
     private RecyclerView recyclerView;
     private ImageAdapter imageAdapter;
     private List<Upload> uploads;
-
     private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_images);
+        setContentView(R.layout.activity_reports);
 
         btnSingOut = findViewById(R.id.btnSingOut);
         btnIncidencia = findViewById(R.id.btnIncidencia);
@@ -58,7 +56,7 @@ public class ImagesActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
-        incidencesDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
+        reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -66,7 +64,7 @@ public class ImagesActivity extends AppCompatActivity {
 
         uploads = new ArrayList<>();
 
-        incidencesDatabase.addValueEventListener(new ValueEventListener() {
+        reportsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -74,7 +72,7 @@ public class ImagesActivity extends AppCompatActivity {
                     uploads.add(upload);
                 }
 
-                imageAdapter = new ImageAdapter(ImagesActivity.this, uploads);
+                imageAdapter = new ImageAdapter(ReportActivity.this, uploads);
                 recyclerView.setAdapter(imageAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true));
                 recyclerView.smoothScrollToPosition(recyclerView.getBottom());
@@ -83,7 +81,7 @@ public class ImagesActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ImagesActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReportActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 progressCircle.setVisibility(View.INVISIBLE);
             }
         });
@@ -93,7 +91,7 @@ public class ImagesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Envio hacia la activity upload
-                startActivity(new Intent(ImagesActivity.this, UploadActivity.class));
+                startActivity(new Intent(ReportActivity.this, UploadActivity.class));
                 finish();
             }
         });
@@ -103,7 +101,7 @@ public class ImagesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 auth.signOut();
-                startActivity(new Intent(ImagesActivity.this, RegisterActivity.class));
+                startActivity(new Intent(ReportActivity.this, RegisterActivity.class));
                 finish();
             }
         });
@@ -112,7 +110,7 @@ public class ImagesActivity extends AppCompatActivity {
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ImagesActivity.this, ProfileActivity.class));
+                startActivity(new Intent(ReportActivity.this, ProfileActivity.class));
             }
         });
 
@@ -130,10 +128,7 @@ public class ImagesActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String name = dataSnapshot.child("user").getValue().toString();
-                    String email = dataSnapshot.child("email").getValue().toString();
-
                     textViewNombre.setText("Bienvenido " + name);
-                    //textViewCorreo.setText("Este es tu email: " + email);
                 }
             }
 

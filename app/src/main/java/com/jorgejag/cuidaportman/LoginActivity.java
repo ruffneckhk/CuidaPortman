@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    startActivity(new Intent(LoginActivity.this, ImagesActivity.class));
+                    startActivity(new Intent(LoginActivity.this, ReportActivity.class));
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Datos incorrectos, no se pudo iniciar sesion.", Toast.LENGTH_SHORT).show();

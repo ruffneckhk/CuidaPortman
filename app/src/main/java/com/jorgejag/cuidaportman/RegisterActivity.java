@@ -112,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
                             if (task2.isSuccessful()) {
-                                startActivity(new Intent(RegisterActivity.this, ImagesActivity.class));
+                                startActivity(new Intent(RegisterActivity.this, ReportActivity.class));
                                 finish();
                             } else {
                                 Toast.makeText(RegisterActivity.this, "El usuario no se ha podido crear", Toast.LENGTH_SHORT).show();
@@ -132,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStart();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(RegisterActivity.this, ImagesActivity.class));
+            startActivity(new Intent(RegisterActivity.this, ReportActivity.class));
             finish();
         }
     }

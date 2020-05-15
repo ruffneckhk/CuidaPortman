@@ -81,7 +81,7 @@ public class UploadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Pedir permisos para usar la camara al usuario
                 askCameraPermissions();
-                //Toast.makeText(ImagesActivity.this, "El boton camara ha sido utilizado", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ReportActivity.this, "El boton camara ha sido utilizado", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,7 +96,7 @@ public class UploadActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            startActivity(new Intent(UploadActivity.this, ImagesActivity.class));
+                            startActivity(new Intent(UploadActivity.this, ReportActivity.class));
                             finish();
                         }
                     }, 3000);
@@ -133,14 +133,8 @@ public class UploadActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 File f = new File(currentPhotoPath);
-                //selectedImage.setImageURI(Uri.fromFile(f));
                 imageUri = Uri.fromFile(f);
                 Picasso.get().load(imageUri).into(selectedImage);
-/*                //System.out.println("EL URI COMPLETO ES " + imageUri);
-
-                //Envio Uri completo al intent ImageAdapter
-                Intent intent = new Intent(this, ImageAdapter.class);
-                intent.putExtra("imgUri", imageUri);*/
             }
 
         }

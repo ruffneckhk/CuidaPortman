@@ -22,7 +22,7 @@
         <activity android:name=".UploadActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ImagesActivity" />
+        <activity android:name=".ReportActivity" />
         <activity
             android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustResize">
