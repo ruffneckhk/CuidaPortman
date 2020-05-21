@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,12 @@ public class ReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         btnSingOut = findViewById(R.id.btnSingOut);
         btnIncidencia = findViewById(R.id.btnIncidencia);
@@ -114,6 +121,11 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
 
+        String email = auth.getCurrentUser().getEmail().toString();
+        Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
+
+        OneSignal.sendTag("User_ID", email);
+
         getUserInfo();
 
     }
@@ -128,6 +140,8 @@ public class ReportActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String name = dataSnapshot.child("user").getValue().toString();
+                    String email = dataSnapshot.child("email").getValue().toString();
+                    //Toast.makeText(ReportActivity.this, email, Toast.LENGTH_SHORT).show();
                     textViewNombre.setText("Bienvenido " + name);
                 }
             }
