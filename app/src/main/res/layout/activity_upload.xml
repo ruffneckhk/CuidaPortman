@@ -39,7 +39,7 @@
             android:id="@+id/imgButtonCapture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@drawable/borde_redondo"
             android:layout_marginTop="5dp"
             android:contentDescription="@string/realiza_una_foto"
             android:textColor="@color/textColor"
@@ -49,7 +49,7 @@
             android:id="@+id/btnEnviar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@drawable/borde_redondo"
             android:layout_marginTop="5dp"
             android:text="@string/enviar_incidencia"
             android:textColor="@color/textColor" />

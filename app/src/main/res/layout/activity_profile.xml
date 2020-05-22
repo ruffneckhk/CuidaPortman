@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/colorAccent"
+            android:background="@drawable/borde_redondo"
             android:text="@string/actualizar"
             android:textColor="@color/textColor" />
     </LinearLayout>
