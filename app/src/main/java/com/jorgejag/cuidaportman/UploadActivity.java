@@ -212,6 +212,7 @@ public class UploadActivity extends AppCompatActivity {
 
                     String uploadId = database.push().getKey();
                     database.child(uploadId).setValue(upload);
+
                     //Notificacion
                     sendNotification();
                 }
@@ -236,7 +237,7 @@ public class UploadActivity extends AppCompatActivity {
 
     private void sendNotification() {
 
-        Toast.makeText(this, "Current Recipients is : cuidaportman@gmail.com", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Current Recipients is : cuidaportman@gmail.com", Toast.LENGTH_SHORT).show();
 
         AsyncTask.execute(new Runnable() {
             @Override

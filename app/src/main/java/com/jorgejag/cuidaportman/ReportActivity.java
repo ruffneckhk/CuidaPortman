@@ -122,7 +122,7 @@ public class ReportActivity extends AppCompatActivity {
         });
 
         String email = auth.getCurrentUser().getEmail().toString();
-        Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
 
         OneSignal.sendTag("User_ID", email);
 
@@ -140,8 +140,6 @@ public class ReportActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String name = dataSnapshot.child("user").getValue().toString();
-                    String email = dataSnapshot.child("email").getValue().toString();
-                    //Toast.makeText(ReportActivity.this, email, Toast.LENGTH_SHORT).show();
                     textViewNombre.setText("Bienvenido " + name);
                 }
             }
