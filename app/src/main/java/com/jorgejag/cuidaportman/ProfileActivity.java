@@ -67,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
 
+
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(ProfileActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
@@ -81,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     //Agregamos los datos del hashmap al usuario con el id anteriormente obtenido
                     usersDatabase.child("Usuarios").child(id).setValue(userMap);
+                    Toast.makeText(ProfileActivity.this, "Datos actualizados", Toast.LENGTH_SHORT).show();
                 }
             }
         });
