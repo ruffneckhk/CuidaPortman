@@ -31,4 +31,6 @@
     <string name="nuevo_password">Nueva Contraseña</string>
     <string name="nombre_actual">Nombre actual:</string>
     <string name="email_actual">Email actual:</string>
+    <string name="coment">Enviar Comentario</string>
+    <string name="textComent">Escribe tu comentario</string>
 </resources>

@@ -21,4 +21,25 @@
         android:layout_height="match_parent"
         android:layout_margin="30dp"
         />
+
+    <EditText
+        android:id="@+id/editTextNewComent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/textComent"
+        android:layout_margin="30dp"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        tools:ignore="LabelFor"/>
+
+    <Button
+        android:id="@+id/btnComent"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/borde_redondo"
+        android:text="@string/coment"
+        android:textColor="@color/textColor" />
 </LinearLayout>
