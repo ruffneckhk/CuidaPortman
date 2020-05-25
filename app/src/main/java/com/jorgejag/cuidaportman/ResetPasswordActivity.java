@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -63,10 +64,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 //Comprueba que la tarea de envio del email se realizo con exito, si no es asi se envia un mensaje indicandolo
                 if (task.isSuccessful()) {
                     Toast.makeText(ResetPasswordActivity.this, "Se ha enviado un correo de reestablecimiento de contraseña", Toast.LENGTH_SHORT).show();
+                    new Intent(ResetPasswordActivity.this, LoginActivity.class);
                 } else {
                     Toast.makeText(ResetPasswordActivity.this, "No se ha podido enviar el correo de recuperacion", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
     }
 }

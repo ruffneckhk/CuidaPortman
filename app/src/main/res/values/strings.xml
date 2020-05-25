@@ -33,4 +33,5 @@
     <string name="email_actual">Email actual:</string>
     <string name="coment">Enviar Comentario</string>
     <string name="textComent">Escribe tu comentario</string>
+    <string name="volver">Volver</string>
 </resources>

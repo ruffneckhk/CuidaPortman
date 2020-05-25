@@ -151,4 +151,9 @@ public class ReportActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(context, "Pulse en CERRAR SESION", Toast.LENGTH_SHORT).show();
+    }
+
 }

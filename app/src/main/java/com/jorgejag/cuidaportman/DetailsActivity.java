@@ -32,6 +32,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView textView;
     private Button btnComent;
+    private Button btnBack;
     private EditText editTextComent;
     private String name;
 
@@ -50,6 +51,7 @@ public class DetailsActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageViewFull);
         textView = findViewById(R.id.txtCommentFull);
         btnComent = findViewById(R.id.btnComent);
+        btnBack = findViewById(R.id.btnBack);
         editTextComent = findViewById(R.id.editTextNewComent);
 
         database = FirebaseDatabase.getInstance().getReference("Incidencias");
@@ -108,6 +110,15 @@ public class DetailsActivity extends AppCompatActivity {
 
             }
         });
+
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Intent(DetailsActivity.this, ReportActivity.class);
+                finish();
+            }
+        });
     }
 
     //Trabajamos con el usuario que ha iniciado sesion
@@ -128,5 +139,11 @@ public class DetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DetailsActivity.this, ReportActivity.class));
+        finish();
     }
 }

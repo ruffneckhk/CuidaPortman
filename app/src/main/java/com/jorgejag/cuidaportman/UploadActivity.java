@@ -303,4 +303,10 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent (UploadActivity.this, ReportActivity.class));
+        finish();
+    }
 }
