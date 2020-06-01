@@ -79,13 +79,17 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
-                            String oldComent = zoneSnapshot.child("coment").getValue(String.class);
-                            String addComent = "\n" + name + ": " + editTextComent.getText().toString();
-                            Log.i(TAG, zoneSnapshot.child("coment").getValue(String.class));
+                            Comment comment = zoneSnapshot.child("comment").getValue(Comment.class);
+                            String oldComment = comment.toString();
+                            Comment newComment = new Comment(editTextComent.getText().toString());
+                            String addComent = "\n" + name + ": " + newComment;
+                            //Log.i(TAG, zoneSnapshot.child("comment").getValue(String.class));
                             Toast.makeText(DetailsActivity.this, "Comentario enviado", Toast.LENGTH_SHORT).show();
 
-                            if (oldComent.equalsIgnoreCase(comentTextView)) {
-                                zoneSnapshot.child("coment").getRef().setValue(comentTextView + addComent);
+                            if (oldComment.equalsIgnoreCase(comentTextView)) {
+                                //zoneSnapshot.child("comment").getRef().setValue(oldComment + addComent);
+                                zoneSnapshot.child("comment").getRef().child("comment").setValue(oldComment + addComent);
+
                                 //Toast.makeText(DetailsActivity.this, coment, Toast.LENGTH_SHORT).show();
 
                                 Handler handler = new Handler();

@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,8 +31,12 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -58,12 +63,16 @@ public class UploadActivity extends AppCompatActivity {
     private ImageButton imgBtnCapture;
     private EditText editTextComent;
     private ProgressBar progressBar;
+    private String name;
     private Uri imageUri;
     private Context context;
 
     private StorageReference storageReference;
     private DatabaseReference database;
     private StorageTask uploadTask;
+
+    private FirebaseAuth auth;
+    private DatabaseReference usersDatabase;
 
     String currentPhotoPath;
 
@@ -80,6 +89,9 @@ public class UploadActivity extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference("Incidencias");
         database = FirebaseDatabase.getInstance().getReference("Incidencias");
+
+        auth = FirebaseAuth.getInstance();
+        usersDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Accion de cada boton
         imgBtnCapture.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +122,8 @@ public class UploadActivity extends AppCompatActivity {
                 }
             }
         });
+
+        getUserInfo();
     }
 
     //Solicitar permisos de camara
@@ -208,8 +222,10 @@ public class UploadActivity extends AppCompatActivity {
                     while (!urlTask.isSuccessful()) ;
                     Uri downloadUrl = urlTask.getResult();
 
-                    Upload upload = new Upload(new Comment(editTextComent.getText().toString().trim()), downloadUrl.toString());
+
+                    Upload upload = new Upload(new Comment(name + ": " + editTextComent.getText().toString().trim()), downloadUrl.toString());
                     String uploadId = database.push().getKey();
+
                     database.child(uploadId).setValue(upload);
 
                     //Notificacion
@@ -307,5 +323,25 @@ public class UploadActivity extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent (UploadActivity.this, ReportActivity.class));
         finish();
+    }
+
+    //Trabajamos con el usuario que ha iniciado sesion
+    //Pedimos a la base de datos los datos del id que ha iniciado sesion
+    private void getUserInfo() {
+        String id = auth.getCurrentUser().getUid();
+        usersDatabase.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    name = dataSnapshot.child("userName").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
