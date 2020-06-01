@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,8 +39,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position) {
         final Upload uploadCurrent = uploads.get(position);
-        Comment comment = new Comment();
-        holder.textViewComentario.setText(comment.getComment());
+        Comment getComment = uploads.get(position).getComment();
+        holder.textViewComentario.setText(uploadCurrent.getComment().toString());
         Picasso.get().load(uploadCurrent.getImageUrl()).placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(holder.imageView);
 
 
