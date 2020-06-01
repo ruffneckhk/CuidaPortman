@@ -2,29 +2,16 @@ package com.jorgejag.cuidaportman;
 
 public class Upload {
 
-    private String coment;
+    private Comment comment;
     private String imageUrl;
 
     public Upload() {
 
     }
 
-    public Upload(String coment, String imageUrl) {
-
-        if (coment.trim().equals("")) {
-            coment = "Sin comentario";
-        }
-
-        this.coment = coment;
+    public Upload(Comment comment, String imageUrl) {
+        this.comment = comment;
         this.imageUrl = imageUrl;
-    }
-
-    public String getComent() {
-        return coment;
-    }
-
-    public void setComent(String coment) {
-        this.coment = coment;
     }
 
     public String getImageUrl() {
@@ -33,5 +20,13 @@ public class Upload {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 }

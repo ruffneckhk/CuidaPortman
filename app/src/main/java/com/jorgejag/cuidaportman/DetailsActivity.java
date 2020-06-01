@@ -119,7 +119,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    name = dataSnapshot.child("user").getValue().toString();
+                    name = dataSnapshot.child("userName").getValue().toString();
                 }
             }
 

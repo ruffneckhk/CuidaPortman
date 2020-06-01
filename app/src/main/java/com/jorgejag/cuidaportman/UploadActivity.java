@@ -208,7 +208,7 @@ public class UploadActivity extends AppCompatActivity {
                     while (!urlTask.isSuccessful()) ;
                     Uri downloadUrl = urlTask.getResult();
 
-                    Upload upload = new Upload(editTextComent.getText().toString().trim(), downloadUrl.toString());
+                    Upload upload = new Upload(new Comment(editTextComent.getText().toString().trim()), downloadUrl.toString());
 
                     String uploadId = database.push().getKey();
                     database.child(uploadId).setValue(upload);

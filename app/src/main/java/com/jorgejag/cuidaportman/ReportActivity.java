@@ -83,11 +83,13 @@ public class ReportActivity extends AppCompatActivity {
                 recyclerView.setAdapter(imageAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true));
                 recyclerView.smoothScrollToPosition(recyclerView.getBottom());
+                progressCircle.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(ReportActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                progressCircle.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -119,7 +121,7 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
 
-        String email = auth.getCurrentUser().getEmail().toString();
+        String email = auth.getCurrentUser().getEmail();
         //Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
 
         OneSignal.sendTag("User_ID", email);

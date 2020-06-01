@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position) {
         final Upload uploadCurrent = uploads.get(position);
-        holder.textViewComentario.setText(uploadCurrent.getComent());
+        Comment comment = new Comment();
+        holder.textViewComentario.setText(comment.getComment());
         Picasso.get().load(uploadCurrent.getImageUrl()).placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(holder.imageView);
 
 
@@ -46,7 +48,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             @Override
             public void onClick(View v) {
 
-                String getComment = uploads.get(position).getComent();
+                Comment getComment = uploads.get(position).getComment();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.imageView.getDrawable();
 
                 Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -56,7 +58,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
                 //Intent
                 Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra("comment", getComment);
+                intent.putExtra("comment", getComment.toString());
                 intent.putExtra("image", bytes);
                 context.startActivity(intent);
             }
