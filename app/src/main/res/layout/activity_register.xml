@@ -8,11 +8,22 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/editNombreLogin"
+        android:id="@+id/editUserLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="@string/nombre"
+        android:hint="@string/usuario"
+        tools:ignore="LabelFor"
+        android:importantForAutofill="no"
+        android:inputType="text|textCapSentences">
+    </EditText>
+
+    <EditText
+        android:id="@+id/editFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/nombreCompleto"
         tools:ignore="LabelFor"
         android:importantForAutofill="no"
         android:inputType="text|textCapSentences">

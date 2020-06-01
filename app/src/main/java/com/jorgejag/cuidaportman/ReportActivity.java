@@ -32,8 +32,8 @@ public class ReportActivity extends AppCompatActivity {
 
     private Button btnSingOut;
     private Button btnIncidencia;
-    private ProgressBar progressCircle;
     private Button btnProfile;
+    private ProgressBar progressCircle;
 
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
@@ -57,7 +57,7 @@ public class ReportActivity extends AppCompatActivity {
 
         btnSingOut = findViewById(R.id.btnSingOut);
         btnIncidencia = findViewById(R.id.btnIncidencia);
-        textViewNombre = findViewById(R.id.textViewName);
+        textViewNombre = findViewById(R.id.textViewUser);
         progressCircle = findViewById(R.id.progressCircle);
         btnProfile = findViewById(R.id.btnProfile);
 
@@ -83,13 +83,11 @@ public class ReportActivity extends AppCompatActivity {
                 recyclerView.setAdapter(imageAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true));
                 recyclerView.smoothScrollToPosition(recyclerView.getBottom());
-                progressCircle.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(ReportActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                progressCircle.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -139,7 +137,7 @@ public class ReportActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String name = dataSnapshot.child("user").getValue().toString();
+                    String name = dataSnapshot.child("userName").getValue().toString();
                     textViewNombre.setText("Bienvenido " + name);
                 }
             }

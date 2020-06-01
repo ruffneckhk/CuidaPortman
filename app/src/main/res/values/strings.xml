@@ -3,6 +3,7 @@
     <string name="nombre">Nombre</string>
     <string name="actualizar">Actualizar Datos</string>
     <string name="usuario">Usuario</string>
+    <string name="usuarioActual">Usuario Actual:</string>
     <string name="apellidos">Apellidos</string>
     <string name="email">Email</string>
     <string name="password">Contraseña</string>
@@ -27,11 +28,11 @@
     <string name="imagefull">imageFull</string>
     <string name="perfil">Perfil</string>
     <string name="nuevo_nombre">Nuevo Nombre</string>
-    <string name="nuevo_email">Nuevo Email</string>
+    <string name="nuevo_usuario">Nuevo Usuario</string>
     <string name="nuevo_password">Nueva Contraseña</string>
     <string name="nombre_actual">Nombre actual:</string>
-    <string name="email_actual">Email actual:</string>
     <string name="coment">Enviar Comentario</string>
     <string name="textComent">Escribe tu comentario</string>
     <string name="volver">Volver</string>
+    <string name="nombreCompleto">Nombre completo</string>
 </resources>

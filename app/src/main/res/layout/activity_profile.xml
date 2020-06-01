@@ -18,23 +18,23 @@
         android:layout_height="21dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="@string/nombre_actual"
+        android:text="@string/usuarioActual"
         android:textSize="15sp"/>
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/textViewUser"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginTop="20dp"
-        android:text="@string/nombre"
+        android:text="@string/usuario"
         android:textSize="15sp"/>
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editNombreLogin"
+        android:id="@+id/editUserLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nuevo_nombre"
+        android:hint="@string/nuevo_usuario"
         android:textSize="15sp"
         android:importantForAutofill="no"
         android:inputType="text|textPersonName|textCapSentences"
@@ -49,23 +49,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
-            android:text="@string/email_actual"
+            android:text="@string/nombre_actual"
             android:textSize="15sp"/>
         <TextView
-            android:id="@+id/textViewEmail"
+            android:id="@+id/textViewFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/email"
+            android:text="@string/nombreCompleto"
             android:textSize="15sp"/>
 
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editEmailLogin"
+        android:id="@+id/editFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nuevo_email"
+        android:hint="@string/nuevo_nombre"
         android:textSize="15sp"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress|textCapSentences"

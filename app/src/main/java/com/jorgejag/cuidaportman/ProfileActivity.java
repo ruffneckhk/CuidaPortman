@@ -6,19 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,11 +26,11 @@ import java.util.Map;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "LOG";
-    private TextView textViewName;
-    private TextView textViewEmail;
-    private EditText editTextName;
-    private EditText editTextEmail;
-    private EditText editTextPassword;
+    private TextView textViewUser;
+    private TextView textFullName;
+    private EditText editTextUser;
+    private EditText editTextFullName;
+    private EditText editPassword;
     private Button btnUpdate;
 
     private FirebaseAuth auth;
@@ -51,12 +46,12 @@ public class ProfileActivity extends AppCompatActivity {
         usersDatabase = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        textViewName = findViewById(R.id.textViewName);
-        textViewEmail = findViewById(R.id.textViewEmail);
+        textViewUser = findViewById(R.id.textViewUser);
+        textFullName = findViewById(R.id.textViewFullName);
 
-        editTextName = findViewById(R.id.editNombreLogin);
-        editTextEmail = findViewById(R.id.editEmailLogin);
-        editTextPassword = findViewById(R.id.editPasswordLogin);
+        editTextUser = findViewById(R.id.editUserLogin);
+        editTextFullName = findViewById(R.id.editFullName);
+        editPassword = findViewById(R.id.editPasswordLogin);
 
         btnUpdate = findViewById(R.id.btnUpdate);
 
@@ -64,22 +59,24 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String name = editTextName.getText().toString();
-                String email = editTextEmail.getText().toString();
-                String password = editTextPassword.getText().toString();
+                String userName = editTextUser.getText().toString();
+                String fullName = editTextFullName.getText().toString();
+                String password = editPassword.getText().toString();
 
+                //Obtenemos el id del usuario logeado
+                String id = auth.getCurrentUser().getUid();
 
-                if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                if (userName.isEmpty() || fullName.isEmpty() || password.isEmpty()) {
                     Toast.makeText(ProfileActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("user", name);
-                    userMap.put("email", email);
-                    userMap.put("password", password);
+                    auth.getCurrentUser().updatePassword(password);
 
-                    //Obtenemos el id del usuario logeado
-                    String id = auth.getCurrentUser().getUid();
+                    Map<String, Object> userMap = new HashMap<>();
+                    userMap.put("id", id);
+                    userMap.put("userName", userName);
+                    userMap.put("fullName", fullName);
+
 
                     //Agregamos los datos del hashmap al usuario con el id anteriormente obtenido
                     usersDatabase.child("Usuarios").child(id).setValue(userMap);
@@ -95,17 +92,17 @@ public class ProfileActivity extends AppCompatActivity {
     //Trabajamos con el usuario que ha iniciado sesion
     //Pedimos a la base de datos los datos del id que ha iniciado sesion
     private void getUserInfo() {
-        String id = auth.getCurrentUser().getUid();
+        final String id = auth.getCurrentUser().getUid();
         usersDatabase.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String name = dataSnapshot.child("user").getValue().toString();
-                    String email = dataSnapshot.child("email").getValue().toString();
+                    String user = dataSnapshot.child("userName").getValue().toString();
+                    String fullName = dataSnapshot.child("fullName").getValue().toString();
 
-                    textViewName.setText(name);
-                    textViewEmail.setText(email);
+                    textViewUser.setText(user);
+                    textFullName.setText(fullName);
                 }
             }
 
