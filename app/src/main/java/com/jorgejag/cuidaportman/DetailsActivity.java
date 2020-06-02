@@ -36,7 +36,6 @@ public class DetailsActivity extends AppCompatActivity {
     private String name;
 
     private DatabaseReference database;
-    private DatabaseReference databaseComent;
 
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
@@ -53,10 +52,8 @@ public class DetailsActivity extends AppCompatActivity {
         editTextComent = findViewById(R.id.editTextNewComent);
 
         database = FirebaseDatabase.getInstance().getReference("Incidencias");
-        databaseComent = database.getRef().child("comment");
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
-
 
         //Intent con la informacion de la incidencia
         Intent intent = getIntent();
@@ -68,7 +65,6 @@ public class DetailsActivity extends AppCompatActivity {
         imageView.setImageBitmap(bitmap);
 
         getUserInfo();
-
 
         btnComent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +82,6 @@ public class DetailsActivity extends AppCompatActivity {
 
                             if (oldComent.equalsIgnoreCase(comentTextView)) {
                                 zoneSnapshot.child("comment").getRef().setValue(comentTextView + addComent);
-                                //Toast.makeText(DetailsActivity.this, coment, Toast.LENGTH_SHORT).show();
 
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
@@ -95,7 +90,7 @@ public class DetailsActivity extends AppCompatActivity {
                                         startActivity(new Intent(DetailsActivity.this, ReportActivity.class));
                                         finish();
                                     }
-                                }, 3000);
+                                }, 1000);
                             }
                         }
                     }
@@ -109,7 +104,6 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
     }
-
 
     //Trabajamos con el usuario que ha iniciado sesion
     //Pedimos a la base de datos los datos del id que ha iniciado sesion
