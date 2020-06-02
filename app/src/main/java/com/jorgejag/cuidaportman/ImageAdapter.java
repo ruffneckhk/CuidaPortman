@@ -37,7 +37,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position) {
         final Upload uploadCurrent = uploads.get(position);
-        holder.textViewComentario.setText(uploadCurrent.getComent());
+        holder.textViewComentario.setText(uploadCurrent.getComment());
         Picasso.get().load(uploadCurrent.getImageUrl()).placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(holder.imageView);
 
 
@@ -46,7 +46,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             @Override
             public void onClick(View v) {
 
-                String getComment = uploads.get(position).getComent();
+                String getComment = uploads.get(position).getComment();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.imageView.getDrawable();
 
                 Bitmap bitmap = bitmapDrawable.getBitmap();

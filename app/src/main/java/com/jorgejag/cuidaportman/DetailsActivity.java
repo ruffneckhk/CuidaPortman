@@ -53,7 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
         editTextComent = findViewById(R.id.editTextNewComent);
 
         database = FirebaseDatabase.getInstance().getReference("Incidencias");
-        databaseComent = database.getRef().child("coment");
+        databaseComent = database.getRef().child("comment");
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -79,13 +79,13 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
-                            String oldComent = zoneSnapshot.child("coment").getValue(String.class);
+                            String oldComent = zoneSnapshot.child("comment").getValue(String.class);
                             String addComent = "\n" + name + ": " + editTextComent.getText().toString();
-                            Log.i(TAG, zoneSnapshot.child("coment").getValue(String.class));
+                            Log.i(TAG, zoneSnapshot.child("comment").getValue(String.class));
                             Toast.makeText(DetailsActivity.this, "Comentario enviado", Toast.LENGTH_SHORT).show();
 
                             if (oldComent.equalsIgnoreCase(comentTextView)) {
-                                zoneSnapshot.child("coment").getRef().setValue(comentTextView + addComent);
+                                zoneSnapshot.child("comment").getRef().setValue(comentTextView + addComent);
                                 //Toast.makeText(DetailsActivity.this, coment, Toast.LENGTH_SHORT).show();
 
                                 Handler handler = new Handler();

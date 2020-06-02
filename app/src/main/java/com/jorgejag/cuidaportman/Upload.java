@@ -2,29 +2,29 @@ package com.jorgejag.cuidaportman;
 
 public class Upload {
 
-    private String coment;
+    private String comment;
     private String imageUrl;
 
     public Upload() {
 
     }
 
-    public Upload(String coment, String imageUrl) {
+    public Upload(String comment, String imageUrl) {
 
-        if (coment.trim().equals("")) {
-            coment = "Sin comentario";
+        if (comment.trim().equals("")) {
+            comment = "Sin comentario";
         }
 
-        this.coment = coment;
+        this.comment = comment;
         this.imageUrl = imageUrl;
     }
 
-    public String getComent() {
-        return coment;
+    public String getComment() {
+        return comment;
     }
 
-    public void setComent(String coment) {
-        this.coment = coment;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getImageUrl() {
