@@ -32,8 +32,8 @@ public class ReportActivity extends AppCompatActivity {
 
     private Button btnSingOut;
     private Button btnIncidencia;
-    private Button btnProfile;
     private ProgressBar progressCircle;
+    private Button btnProfile;
 
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
@@ -121,7 +121,7 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
 
-        String email = auth.getCurrentUser().getEmail();
+        String email = auth.getCurrentUser().getEmail().toString();
         //Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
 
         OneSignal.sendTag("User_ID", email);
