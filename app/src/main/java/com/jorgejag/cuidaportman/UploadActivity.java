@@ -10,7 +10,6 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -55,7 +54,7 @@ import java.util.Scanner;
 
 public class UploadActivity extends AppCompatActivity {
 
-    private static final int CAMERA_PERMIISSION_CODE = 101;
+    private static final int CAMERA_PERMISSION_CODE = 101;
     private static final int CAMERA_REQUEST_CODE = 102;
 
     private Button btnSend;
@@ -73,7 +72,7 @@ public class UploadActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
 
-    String currentPhotoPath;
+    private String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +127,7 @@ public class UploadActivity extends AppCompatActivity {
     //Solicitar permisos de camara
     private void askCameraPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMIISSION_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
         } else {
             dispatchTakePictureIntent();
         }
@@ -137,7 +136,7 @@ public class UploadActivity extends AppCompatActivity {
     //Llamada a metodo openCamara() si se han aceptado los permisos
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMIISSION_CODE) {
+        if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
             } else {
