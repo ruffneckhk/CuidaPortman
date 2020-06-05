@@ -51,6 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
         //Instanciamos database
         dataBaseRef = FirebaseDatabase.getInstance().getReference();
 
+        progressDialog = new ProgressDialog(RegisterActivity.this);
+
         editUsuario = findViewById(R.id.editUserLogin);
         editEmail = findViewById(R.id.editEmailLogin);
         editPassword = findViewById(R.id.editPasswordLogin);
@@ -62,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(RegisterActivity.this);
+
                 progressDialog.setMessage("Por favor espera...");
                 progressDialog.show();
 
@@ -75,9 +77,11 @@ public class RegisterActivity extends AppCompatActivity {
                 //Comprobacion de que los campos de texto no estan vacios
                 if (TextUtils.isEmpty(strUserName) || TextUtils.isEmpty(strFullName)
                         || TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPassword)) {
+                    progressDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Debe rellenar todos los campos", Toast.LENGTH_SHORT).show();
                     //Comprobacion de longitud del password
                 } else if (strPassword.length() < 6) {
+                    progressDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "La contrasena debe tener 6 o mas caracteres", Toast.LENGTH_SHORT).show();
                     //Lamada al metodo register
                 } else {
@@ -85,35 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
-        /*btnRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                user = editUsuario.getText().toString();
-                email = editEmail.getText().toString();
-                password = editPassword.getText().toString();
-
-
-                //Comprobamos que los campos no esten vacios
-                if (!user.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-
-                    //Comprobacion de que la contrasena tenga mas de 6 caracteres
-                    if (password.length() >= 6) {
-                        //Llamada al metodo registrarUsuario
-                        registerUser();
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "El password debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(RegisterActivity.this, "Completa los campos", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
 
         //Al pulsar en el boton de login pasamos a la activity de login
         btnSendToLogin.setOnClickListener(new View.OnClickListener() {
@@ -167,46 +142,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    /*private void registerUser() {
-        //Crea el usuario utilizando email y password ingresados
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-
-                    //HashMap con los datos a agregar a las base de datos
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("user", user);
-                    map.put("email", email);
-                    map.put("password", password);
-
-                    //Obtenemos el id del usuario
-                    String id = auth.getCurrentUser().getUid();
-
-                    //Agregamos los datos del hashmap al usuario con el id anteriormente obtenido
-                    dataBaseRef.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if (task2.isSuccessful()) {
-                                startActivity(new Intent(RegisterActivity.this, ReportActivity.class));
-                                finish();
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "El usuario no se ha podido crear", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } else {
-                    Toast.makeText(RegisterActivity.this, "La cuenta de correo ya esta registrada", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }*/
-
     //Para mantener la sesion abierta, comprobamos si el usuario ha hecho login anteriormente
     @Override
     protected void onStart() {
         super.onStart();
-
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(RegisterActivity.this, ReportActivity.class));
             finish();

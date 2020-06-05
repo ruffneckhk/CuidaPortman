@@ -65,7 +65,6 @@ public class UploadActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private String name;
     private Uri imageUri;
-    private Context context;
 
     private StorageReference storageReference;
     private DatabaseReference database;
@@ -201,7 +200,8 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        if (imageUri != null && !editTextComent.getText().toString().equals("")) {
+        String comment = editTextComent.getText().toString();
+        if (imageUri != null && !comment.isEmpty()) {
             //Damos un nombre unico a cada incidencia subida
             StorageReference fileRerence = storageReference.child("Incidencias" + System.currentTimeMillis() + ".jpg");
 
