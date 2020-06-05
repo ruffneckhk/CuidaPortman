@@ -3,11 +3,11 @@ package com.jorgejag.cuidaportman;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,7 +58,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String comentTextView = intent.getStringExtra("comment");
         byte[] bytes = getIntent().getByteArrayExtra("image");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
         textView.setText(comentTextView);
         imageView.setImageBitmap(bitmap);
@@ -69,7 +68,6 @@ public class DetailsActivity extends AppCompatActivity {
         btnComent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 database.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -100,9 +98,11 @@ public class DetailsActivity extends AppCompatActivity {
                         Log.w(TAG, "onCancelled", databaseError.toException());
                     }
                 });
-
             }
+
+
         });
+
     }
 
     //Trabajamos con el usuario que ha iniciado sesion

@@ -133,7 +133,7 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
-    //Llamada a metodo openCamara() si se han aceptado los permisos
+    //Llamada a metodo dispatchTakePictureIntent() si se han otorgado los permisos
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == CAMERA_PERMISSION_CODE) {
