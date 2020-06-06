@@ -10,74 +10,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical">
-
-       <ProgressBar
+        <ProgressBar
             android:id="@+id/progressCircle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-        <TextView
-            android:id="@+id/textViewUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="@string/nombre" />
-
-
-        <Button
-            android:id="@+id/btnIncidencia"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/borde_redondo"
-            android:text="@string/capturar"
-            android:textColor="@color/textColor"
-            android:layout_gravity="bottom"
-            />
-
-
-        <Button
-            android:id="@+id/btnProfile"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/borde_redondo"
-            android:layout_marginTop="10dp"
-            android:text="@string/perfil"
-            android:textColor="@color/textColor"
-            android:layout_gravity="bottom"/>
-
-        <Button
-            android:id="@+id/btnSingOut"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/borde_redondo"
-            android:layout_marginTop="10dp"
-            android:text="@string/cerrar_sesion"
-            android:textColor="@color/textColor"
-            android:layout_gravity="bottom"
-            />
-
     </LinearLayout>
-
-
 </LinearLayout>

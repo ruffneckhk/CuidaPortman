@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(RegisterActivity.this, ReportActivity.class));
+            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
             finish();
         }
     }

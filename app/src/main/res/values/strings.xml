@@ -35,4 +35,6 @@
     <string name="textComent">Escribe tu comentario</string>
     <string name="volver">Volver</string>
     <string name="nombreCompleto">Nombre completo</string>
+    <string name="ver_Incidencias">Ver Incidencias</string>
+    <string name="Wellcome">Bienvenido: </string>
 </resources>
