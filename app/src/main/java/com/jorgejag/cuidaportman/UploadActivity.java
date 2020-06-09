@@ -104,6 +104,8 @@ public class UploadActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Con uploadtask evitamos que se envien incidencias seguidas
+                //No se enviaran hasta que termine de enviarse la primera
                 if (uploadTask != null && uploadTask.isInProgress()) {
                     Toast.makeText(UploadActivity.this, "Subida en progreso", Toast.LENGTH_SHORT).show();
                 } else {
@@ -145,6 +147,7 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
+    //Agrega la imageUri mediante Picasso
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -165,29 +168,29 @@ public class UploadActivity extends AppCompatActivity {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,  //* prefix *//*
-                ".jpg",         //* suffix *//*
-                storageDir      //* directory *//*
+                imageFileName,  //* prefijo *//*
+                ".jpg",         //* sufijo *//*
+                storageDir      //* directorio *//*
         );
 
-        // Save a file: path for use with ACTION_VIEW intents
+        // Guarda el fichero: path para uso con los ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
+        //Nos aseguramos de que haya una actividad de cámara para manejar el intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
+            //Crea el file donde va a ir la foto
             File photoFile = null;
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                // Error occurred while creating the File
+                ex.getStackTrace();
 
             }
-            // Continue only if the File was successfully created
+            //Continua solo si el File ha sudo creado correctamente
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.jorgejag.android.fileprovider",
@@ -198,6 +201,7 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
+    //Meotodo para subir finalmente la foto y el comentario
     private void uploadFile() {
         String comment = editTextComent.getText().toString();
         final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -229,8 +233,6 @@ public class UploadActivity extends AppCompatActivity {
 
                     database.child(uploadId).setValue(upload);
 
-                    //Notificacion
-                    //sendNotification();
                 }
 
             }).addOnFailureListener(new OnFailureListener() {
