@@ -1,0 +1,16 @@
+Index: app/src/main/java/com/jorgejag/cuidaportman/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/jorgejag/cuidaportman/LoginActivity.java	(date 1577567681000)
++++ app/src/main/java/com/jorgejag/cuidaportman/LoginActivity.java	(date 1577567863000)
+@@ -38,7 +38,7 @@
+ 
+         editEmail = findViewById(R.id.editEmailLogin);
+         editPassword = findViewById(R.id.editPasswordLogin);
+-        btnLogin =  findViewById(R.id.btnLogin);
++        btnLogin = findViewById(R.id.btnLogin);
+ 
+         auth = FirebaseAuth.getInstance();
+ 

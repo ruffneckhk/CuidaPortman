@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".UploadActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="376dp"
+        android:layout_height="370dp"
+        android:contentDescription="@string/fotocapturada" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+        <EditText
+            android:id="@+id/editTextComent"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:hint="@string/escribe_el_comentario"
+            android:inputType="textCapSentences|textAutoCorrect"
+            android:importantForAutofill="no" />
+
+        <ImageButton
+            android:id="@+id/imgButtonCapture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borde_redondo"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/realiza_una_foto"
+            android:textColor="@color/textColor"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <Button
+            android:id="@+id/btnEnviar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borde_redondo"
+            android:layout_marginTop="5dp"
+            android:text="@string/enviar_incidencia"
+            android:textColor="@color/textColor" />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
