@@ -98,9 +98,9 @@ public class HomeActivity extends AppCompatActivity {
                     String email = auth.getCurrentUser().getEmail();
                     String user = dataSnapshot.child("userName").getValue().toString();
                     String fullName = dataSnapshot.child("fullName").getValue().toString();
-                    textViewUser2.setText(user);
-                    textViewEmail.setText(email);
-                    textViewFullName.setText(fullName);
+                    textViewUser2.setText("Usuario: " + user);
+                    textViewEmail.setText("Email: " + email);
+                    textViewFullName.setText("Nombre completo: " + fullName);
                 }
             }
 

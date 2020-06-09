@@ -39,6 +39,7 @@ public class ReportActivity extends AppCompatActivity {
 
         progressCircle = findViewById(R.id.progressCircle);
 
+        //Database reference para trabajar con las incidencias.
         reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -49,9 +50,11 @@ public class ReportActivity extends AppCompatActivity {
         context = new ReportActivity();
 
 
-
+        //Array para las incidencias subidas
         uploads = new ArrayList<>();
 
+        //Creamos un listener sobre el nodo Incidencias que recorrer las instantaneas
+        //y las agregue al arraylist Uploads
         reportsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -59,18 +62,19 @@ public class ReportActivity extends AppCompatActivity {
                     Upload upload = postSnapshot.getValue(Upload.class);
                     uploads.add(upload);
                 }
-
+                //Añadimos el contenido del uploads a la recyclerview
                 imageAdapter = new ImageAdapter(ReportActivity.this, uploads);
+                progressCircle.setVisibility(View.INVISIBLE);
                 recyclerView.setAdapter(imageAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true));
                 //Muevo la posicion de la recyclerview a la ultima posicion anadida
                 recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView,null, uploads.size()-1);
-                progressCircle = findViewById(R.id.progressCircle);
-                progressCircle.setVisibility(View.INVISIBLE);
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressCircle.setVisibility(View.INVISIBLE);
                 Toast.makeText(ReportActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

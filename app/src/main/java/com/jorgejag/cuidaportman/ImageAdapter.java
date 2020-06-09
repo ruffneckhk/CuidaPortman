@@ -20,6 +20,7 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private Context context;
+    //Lista para cargar las incidencias que hemos subido
     private List<Upload> uploads;
 
 
@@ -31,18 +32,24 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Creamos la vista con la imagen creada para el item
         View view = LayoutInflater.from(context).inflate(R.layout.image_item, parent, false);
         return new ImageViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position) {
+        //Creamos un objeto upload con la posicion de la lista en la que estamos.
         final Upload uploadCurrent = uploads.get(position);
+        //Pasamos al holder el comentario y la imagen
         holder.textViewComentario.setText(uploadCurrent.getComment());
-        Picasso.get().load(uploadCurrent.getImageUrl()).placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(holder.imageView);
+        Picasso.get().load(uploadCurrent.getImageUrl())
+                .placeholder(R.mipmap.ic_launcher)
+                .fit().centerCrop()
+                .into(holder.imageView);
 
 
-        //Pasamos la incidencia a la activity DetailsActivity
+        //Pasamos la incidencia a la activity DetailsActivity al hacer click sobre una imagen de la recyclerview
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +76,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return uploads.size();
     }
 
+    //Clase para adaptar nuestro contenido en la reciclerview
     public class ImageViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textViewComentario;
