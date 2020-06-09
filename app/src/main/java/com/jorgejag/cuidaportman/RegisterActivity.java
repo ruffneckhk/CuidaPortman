@@ -34,10 +34,10 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnSendToLogin;
     private ProgressDialog progressDialog;
 
-    //Objeto Autenticacion
+    //Instancia Autenticacion
     FirebaseAuth auth;
 
-    //Objeto DatabaseReference
+    //Instancia DatabaseReference
     DatabaseReference dataBaseRef;
 
     @Override
