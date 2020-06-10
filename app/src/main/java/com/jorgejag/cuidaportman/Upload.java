@@ -1,7 +1,5 @@
 package com.jorgejag.cuidaportman;
 
-import java.sql.Timestamp;
-
 public class Upload {
 
     private String comment;

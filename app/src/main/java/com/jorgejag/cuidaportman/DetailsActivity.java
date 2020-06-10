@@ -53,7 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
 
-        //Intent con la informacion de la incidencia
+        //Intent con la informacion de la incidencia desde la activity Reports
         Intent intent = getIntent();
         final String comentTextView = intent.getStringExtra("comment");
         byte[] bytes = getIntent().getByteArrayExtra("image");
@@ -64,6 +64,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         getUserInfo();
 
+        //Envia un comentario, recorriendo el nodo Incidencias añadiendo el comentario a la incidencia
+        //seleccionada
         btnComent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
