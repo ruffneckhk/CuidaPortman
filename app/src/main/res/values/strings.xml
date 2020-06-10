@@ -15,7 +15,7 @@
     <string name="cerrar_sesion">Cerrar Sesion</string>
     <string name="iniciar_sesion">Iniciar Sesion</string>
     <string name="cuenta_existente">Ya tengo cuenta</string>
-    <string name="reestablecer">Reestablecer Contraseña</string>
+    <string name="reestablecer">Restablecer Contraseña</string>
     <string name="olvidada">Olvide mi contraseña</string>
     <string name="capturar">Nueva Incidencia</string>
     <string name="tomar_foto">Tomar Foto</string>
