@@ -89,27 +89,31 @@ public class HomeActivity extends AppCompatActivity {
     //Trabajamos con el usuario que ha iniciado sesion
     //Pedimos a la base de datos los datos del id que ha iniciado sesion
     private void getUserInfo() {
-        String id = auth.getCurrentUser().getUid();
-        usersDatabase.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
-                    String email = auth.getCurrentUser().getEmail();
-                    String user = dataSnapshot.child("userName").getValue().toString();
-                    String fullName = dataSnapshot.child("fullName").getValue().toString();
-                    textViewUser2.setText("Usuario: " + user);
-                    textViewEmail.setText("Email: " + email);
-                    textViewFullName.setText("Nombre completo: " + fullName);
+        if (auth.getCurrentUser()!=null) {
+            String id = auth.getCurrentUser().getUid();
+            usersDatabase.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    if (dataSnapshot.exists()) {
+                        String email = auth.getCurrentUser().getEmail();
+                        String user = dataSnapshot.child("userName").getValue().toString();
+                        String fullName = dataSnapshot.child("fullName").getValue().toString();
+                        textViewUser2.setText("Usuario: " + user);
+                        textViewEmail.setText("Email: " + email);
+                        textViewFullName.setText("Nombre completo: " + fullName);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
+
     }
 
     @Override
