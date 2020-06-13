@@ -13,11 +13,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -45,13 +43,9 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class UploadActivity extends AppCompatActivity {
 
@@ -59,11 +53,11 @@ public class UploadActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 102;
 
     private Button btnSend;
-    private ImageView selectedImage;
+    private ImageView imageViewPhoto;
     private ImageButton imgBtnCapture;
     private EditText editTextComent;
     private ProgressBar progressBar;
-    private String name;
+    private String comment;
     private Uri imageUri;
 
     private StorageReference storageReference;
@@ -82,14 +76,18 @@ public class UploadActivity extends AppCompatActivity {
 
         btnSend = findViewById(R.id.btnEnviar);
         imgBtnCapture = findViewById(R.id.imgButtonCapture);
-        selectedImage = findViewById(R.id.imageView);
+        imageViewPhoto = findViewById(R.id.imageView);
         editTextComent = findViewById(R.id.editTextComent);
         progressBar = findViewById(R.id.progressBar);
 
+        //StorageReference para las imagenes alojadas en Firebase
         storageReference = FirebaseStorage.getInstance().getReference("Incidencias");
+        //DatabaseReference para el nodo Incidencias
         database = FirebaseDatabase.getInstance().getReference("Incidencias");
 
+        //Authentication
         auth = FirebaseAuth.getInstance();
+        //DatabaseReference para el nodo usuarios
         usersDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Accion de cada boton
@@ -147,7 +145,7 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
-    //Agrega la imageUri mediante Picasso
+    //Agrega la imageUri mediante Picasso a la Imageview
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -155,7 +153,7 @@ public class UploadActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 File f = new File(currentPhotoPath);
                 imageUri = Uri.fromFile(f);
-                Picasso.get().load(imageUri).into(selectedImage);
+                Picasso.get().load(imageUri).into(imageViewPhoto);
             }
 
         }
@@ -163,7 +161,7 @@ public class UploadActivity extends AppCompatActivity {
 
     //Crear el fichero de imagen
     private File createImageFile() throws IOException {
-        // Create an image file name
+        // Crea un nombre individual para cada imagen
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -228,7 +226,7 @@ public class UploadActivity extends AppCompatActivity {
                     Uri downloadUrl = urlTask.getResult();
 
 
-                    Upload upload = new Upload(name + ": " + editTextComent.getText().toString().trim(), downloadUrl.toString(), stringTimeStam);
+                    Upload upload = new Upload(UploadActivity.this.comment + ": " + editTextComent.getText().toString().trim(), downloadUrl.toString(), stringTimeStam);
                     String uploadId = database.push().getKey();
 
                     database.child(uploadId).setValue(upload);
@@ -268,7 +266,7 @@ public class UploadActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    name = dataSnapshot.child("userName").getValue().toString();
+                    comment = dataSnapshot.child("userName").getValue().toString();
                 }
             }
 

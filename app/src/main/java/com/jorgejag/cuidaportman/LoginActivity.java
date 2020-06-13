@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private String password = "";
 
     //Autenticacion
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        //Accion del boton para logear
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Boton para la recuperacion de la contrasena
         btnResendPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -67,12 +67,15 @@ public class ProfileActivity extends AppCompatActivity {
                 //Obtenemos el id del usuario logeado
                 String id = auth.getCurrentUser().getUid();
 
+                //Comprobamos que no haya ningun campo vacio
                 if (userName.isEmpty() || fullName.isEmpty() || password.isEmpty()) {
                     Toast.makeText(ProfileActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
 
+                    //Actualiza el password
                     auth.getCurrentUser().updatePassword(password);
 
+                    //Actualiza el resto de campos con un HashMap
                     Map<String, Object> userMap = new HashMap<>();
                     userMap.put("id", id);
                     userMap.put("userName", userName);
@@ -91,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
                             startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
                             finish();
                         }
-                    }, 3000);
+                    }, 1500);
                 }
             }
         });

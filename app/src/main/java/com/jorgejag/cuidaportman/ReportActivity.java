@@ -62,7 +62,8 @@ public class ReportActivity extends AppCompatActivity {
                     Upload upload = postSnapshot.getValue(Upload.class);
                     uploads.add(upload);
                 }
-                //Añadimos el contenido del uploads a la recyclerview
+                //Añadimos el contenido del array uploads a la recyclerview mediante
+                //el adapter
                 imageAdapter = new ImageAdapter(ReportActivity.this, uploads);
                 progressCircle.setVisibility(View.INVISIBLE);
                 recyclerView.setAdapter(imageAdapter);

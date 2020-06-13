@@ -53,7 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
 
-        //Intent con la informacion de la incidencia desde la activity Reports
+        //Intent con la informacion de la incidencia recibida desde la activity Reports
         Intent intent = getIntent();
         final String comentTextView = intent.getStringExtra("comment");
         byte[] bytes = getIntent().getByteArrayExtra("image");
@@ -77,11 +77,10 @@ public class DetailsActivity extends AppCompatActivity {
                             String oldComent = zoneSnapshot.child("comment").getValue(String.class);
                             String addComent = "\n" + name + ": " + editTextComent.getText().toString();
                             Log.i(TAG, zoneSnapshot.child("comment").getValue(String.class));
-                            Toast.makeText(DetailsActivity.this, "Comentario enviado", Toast.LENGTH_SHORT).show();
 
                             if (oldComent.equalsIgnoreCase(comentTextView)) {
                                 zoneSnapshot.child("comment").getRef().setValue(comentTextView + addComent);
-
+                                Toast.makeText(DetailsActivity.this, "Comentario enviado", Toast.LENGTH_SHORT).show();
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     @Override

@@ -49,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         btnIncidencias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Envio hacia la activity de incidencias
                 startActivity(new Intent(HomeActivity.this, ReportActivity.class));
             }
         });
@@ -85,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    //Trabaja con el usuario que ha iniciado sesion
+    //Trabajamos con el usuario que ha iniciado sesion
     //Pedimos a la base de datos los datos del id que ha iniciado sesion
     private void getUserInfo() {
         String id = auth.getCurrentUser().getUid();

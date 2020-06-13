@@ -45,10 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //Instanciamos FirebaseAuth
+        //FirebaseAuth
         auth = FirebaseAuth.getInstance();
 
-        //Instanciamos database
+        //databaseReference
         dataBaseRef = FirebaseDatabase.getInstance().getReference();
 
         progressDialog = new ProgressDialog(RegisterActivity.this);
@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
             }
         });
     }
@@ -114,20 +115,19 @@ public class RegisterActivity extends AppCompatActivity {
 
                             dataBaseRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(userId);
 
-                            //Hashmap para agregar los datos a FatabaseReference
+                            //Hashmap para agregar los datos a DatabaseReference
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id", userId);
                             hashMap.put("userName", userName.toLowerCase());
                             hashMap.put("fullName", fullName);
 
-                            //Cuando los valores esten aniadidos a la Database Vamos a la MainActivity
+                            //Cuando los valores esten aniadidos a la Database vamos a la HomeActivity
                             dataBaseRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         progressDialog.dismiss();
                                         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
                                 }
