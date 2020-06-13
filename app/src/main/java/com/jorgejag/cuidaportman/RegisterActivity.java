@@ -121,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("userName", userName.toLowerCase());
                             hashMap.put("fullName", fullName);
 
-                            //Cuando los valores esten aniadidos a la Database vamos a la HomeActivity
+                            //Cuando los valores esten aniadidos a la Database vamos a la HomeActivit
                             dataBaseRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
